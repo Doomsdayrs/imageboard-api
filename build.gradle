@@ -1,12 +1,3 @@
-apply plugin: 'java'
-apply plugin: 'kotlin'
-apply plugin: 'maven'
-
-group 'net.kodehawa'
-version = "3.0.0"
-
-sourceCompatibility = 1.8
-
 buildscript {
     ext.kotlin_version = '1.3.72'
     repositories {
@@ -16,6 +7,18 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
+plugins{
+    id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.3.72'
+    id 'maven'
+}
+
+group 'net.kodehawa'
+version = "3.0.0"
+
+sourceCompatibility = 1.8
+
+
 
 repositories {
     mavenCentral()
@@ -49,6 +52,10 @@ task prepareSource(type: Copy) {
 }
 prepareSource.dependsOn clean
 
+wrapper {
+    gradleVersion = '4.1'
+
+}
 compileJava {
     source = sourcesForRelease.destinationDir
     classpath = sourceSets.main.compileClasspath
