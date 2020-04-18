@@ -17,22 +17,21 @@ package net.kodehawa.lib.imageboards
 
 import net.kodehawa.lib.imageboards.entities.BoardImage
 import net.kodehawa.lib.imageboards.entities.impl.KonachanImage
-import java.util.function.Consumer
 
 object TagImages {
-    @JvmStatic
-    fun main(args: Array<String>) {
-        // Asynchronous GET
-        // 20 images tagged with animal_ears
-        DefaultImageBoards.KONACHAN.search(limit = 20, query = "animal_ears").async(Consumer { images: List<KonachanImage> -> for (image in images) println(image.uRL) })
+	@JvmStatic
+	fun main(args: Array<String>) {
+		// Asynchronous GET
+		// 20 images tagged with animal_ears
+		DefaultImageBoards.KONACHAN.search(limit = 20, query = "animal_ears").async({ images: List<KonachanImage> -> for (image in images) println(image.url) })
 
-        // Blocking GET
-        // 60 images tagged with animal_ears
-        val image: BoardImage = DefaultImageBoards.KONACHAN.search("animal_ears").blocking()[0]
-        println(image.uRL)
-        println(image.rating)
-        println(image.tags)
-        println(image.height)
-        println(image.width)
-    }
+		// Blocking GET
+		// 60 images tagged with animal_ears
+		val image: BoardImage = DefaultImageBoards.KONACHAN.search("animal_ears").blocking()[0]
+		println(image.url)
+		println(image.rating)
+		println(image.tags)
+		println(image.height)
+		println(image.width)
+	}
 }

@@ -1,26 +1,45 @@
 package net.kodehawa.lib.imageboards.entities.impl
 
-import net.kodehawa.lib.imageboards.entities.BoardImage
+import com.fasterxml.jackson.annotation.JsonIgnore
+import com.fasterxml.jackson.annotation.JsonProperty
+import net.kodehawa.lib.imageboards.entities.BoardImageStinged
 import net.kodehawa.lib.imageboards.entities.Rating
 
-class GelbooruImage : BoardImage {
-	val source: String? = null
-	val hash: String? = null
-	override val height = 0
-	override val width = 0
-	val id = 0
-	val image: String? = null
-	val owner: String? = null
+data class GelbooruImage(
+		@JsonProperty("source")
+		val source: String? = null,
+
+		@JsonProperty("hash")
+		val hash: String? = null,
+
+		@JsonProperty("height")
+		override val height: Int = 0,
+
+		@JsonProperty("width")
+		override val width: Int = 0,
+
+		@JsonProperty("score")
+		override val score: Int = 0,
+
+		@JsonProperty("url")
+		override val url: String?,
+
+		@JsonProperty("id")
+		val id: Int = 0,
+
+		@JsonProperty("image")
+		val image: String? = null,
+
+		@JsonProperty("owner")
+		val owner: String? = null,
+
+		@JsonProperty("tags")
+		override val tagString: String? = null,
+
+		//Thanks gelbooru for giving a full url I love you
+		@JsonProperty("file_url")
+		val fileUrl: String? = null
+) : BoardImageStinged() {
+	@JsonIgnore
 	override val rating: Rating? = null
-	override val tags: List<String>
-		get() = arrayListOf()
-
-	val fileUrl //Thanks gelbooru for giving a full url I love you
-			: String? = null
-
-	override val score = 0
-
-
-	override val uRL: String?
-		get() = fileUrl
 }

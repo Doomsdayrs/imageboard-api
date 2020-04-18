@@ -15,6 +15,8 @@
  */
 package net.kodehawa.lib.imageboards.entities
 
+import com.fasterxml.jackson.annotation.JsonProperty
+
 /**
  * Board image ratings. Just remember that God is watching.
  * @author Avarel
@@ -23,12 +25,14 @@ enum class Rating(var shortName: String) {
 	/**
 	 * Safe for family and friends. If you had any.
 	 */
+	@JsonProperty("safe")
 	SAFE("s"),
 
 	/**
 	 * Questionable board images. Borderline explicit.
 	 * Would you show this to your grandma?
 	 */
+	@JsonProperty("questionable")
 	QUESTIONABLE("q"),
 
 	/**
@@ -36,6 +40,7 @@ enum class Rating(var shortName: String) {
 	 * Board images with explicit/NSFW ratings.
 	 * Dirty af. Go see a therapist.
 	 */
+	@JsonProperty("explicit")
 	EXPLICIT("e");
 
 	var longName: String = name.toLowerCase()

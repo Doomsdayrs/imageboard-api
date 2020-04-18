@@ -41,8 +41,8 @@ class RequestAction<T> internal constructor(private val call: Call, private val 
 	fun blocking(): T {
 		try {
 			call.execute().use { response ->
-				if (response.code() != 200) {
-					throw QueryFailedException(response.code(), call.request().url().toString())
+				if (response.code != 200) {
+					throw QueryFailedException(response.code, call.request().url.toString())
 				}
 				return transform(response)
 			}
@@ -83,16 +83,16 @@ class RequestAction<T> internal constructor(private val call: Call, private val 
 		call.enqueue(object : Callback {
 			override fun onFailure(call: Call, e: IOException) {
 				call.cancel()
-				failureConsumer!!(e)
+				failureConsumer?.let { it(e) }
 			}
 
 			@Throws(IOException::class)
 			override fun onResponse(call: Call, response: Response) {
 				try {
-					if (response.code() != 200) {
+					if (response.code != 200) {
 						throw QueryFailedException(
-								response.code(),
-								this@RequestAction.call.request().url().toString()
+								response.code,
+								this@RequestAction.call.request().url.toString()
 						)
 					}
 					successConsumer(transform(response))

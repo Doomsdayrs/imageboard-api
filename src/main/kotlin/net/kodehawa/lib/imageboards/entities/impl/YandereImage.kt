@@ -15,60 +15,108 @@
  */
 package net.kodehawa.lib.imageboards.entities.impl
 
-import net.kodehawa.lib.imageboards.entities.BoardImage
+import com.fasterxml.jackson.annotation.JsonIgnore
+import com.fasterxml.jackson.annotation.JsonProperty
+import net.kodehawa.lib.imageboards.entities.BoardImageStinged
 import net.kodehawa.lib.imageboards.entities.Rating
 
 /**
  * @author Kodehawa
  */
-class YandereImage : BoardImage {
-	val actualPreviewWidth = 0
-	val author: String? = null
-	val fileExt: String? = null
-	val fileSize = 0
-	val fileUrl: String? = null
-	override val height = 0
-	val id = 0
-	val jpegFileSize = 0
-	val jpegHeight = 0
-	val jpegUrl: String? = null
-	val jpegWidth = 0
-	val previewHeight = 0
-	val previewUrl: String? = null
-	val previewWidth = 0
-	override val rating: Rating? = null
-	val sampleFileSize = 0
-	val sampleHeight = 0
-	val sampleUrl: String? = null
-	val sampleWidth = 0
-	override val score = 0
-	val status: String? = null
-	override val width = 0
-	private val actualPreviewHeight = 0
-	private val approverId = 0
-	private val change = 0
-	private val createdAt = 0
-	private val creatorId = 0
-	private val frames: List<String>? = null
-	private val framesPending: List<String>? = null
-	private val framesPendingString: String? = null
-	private val framesString: String? = null
-	private val hasChildren: Boolean? = null
-	private val isHeld: Boolean? = null
-	private val isNoteLocked: Boolean? = null
-	private val isPending: Boolean? = null
-	private val isRatingLocked: Boolean? = null
-	private val isShownInIndex: Boolean? = null
-	private val lastCommentedAt = 0
-	private val lastNotedAt = 0
-	private val md5: String? = null
-	private val parentId = 0
-	private val source: String? = null
-	private val updatedAt = 0
+data class YandereImage(
+		@JsonProperty("height")
+		override val height: Int = 0,
+		@JsonProperty("rating")
+		val ratingString: String? = null,
+		@JsonProperty("score")
+		override val score: Int = 0,
+		@JsonProperty("width")
+		override val width: Int = 0,
+		@JsonProperty("actual_preview_width")
+		val actualPreviewWidth: Int = 0,
+		@JsonProperty("author")
+		val author: String? = null,
+		@JsonProperty("file_ext")
+		val fileExt: String? = null,
+		@JsonProperty("file_size")
+		val fileSize: Int = 0,
+		@JsonProperty("file_url")
+		val fileUrl: String? = null,
+		@JsonProperty("id")
+		val id: Int = 0,
+		@JsonProperty("jpeg_file_size")
+		val jpegFileSize: Int = 0,
+		@JsonProperty("jpeg_height")
+		val jpegHeight: Int = 0,
+		@JsonProperty("jpeg_url")
+		val jpegUrl: String? = null,
+		@JsonProperty("jpeg_width")
+		val jpegWidth: Int = 0,
+		@JsonProperty("preview_height")
+		val previewHeight: Int = 0,
+		@JsonProperty("preview_url")
+		val previewUrl: String? = null,
+		@JsonProperty("preview_width")
+		val previewWidth: Int = 0,
+		@JsonProperty("sample_file_size")
+		val sampleFileSize: Int = 0,
+		@JsonProperty("sample_height")
+		val sampleHeight: Int = 0,
+		@JsonProperty("sample_url")
+		val sampleUrl: String? = null,
+		@JsonProperty("sample_width")
+		val sampleWidth: Int = 0,
+		@JsonProperty("status")
+		val status: String? = null,
+		@JsonProperty("actual_preview_height")
+		val actualPreviewHeight: Int = 0,
+		@JsonProperty("approver_id")
+		val approverId: Int = 0,
+		@JsonProperty("change")
+		val change: Int = 0,
+		@JsonProperty("created_at")
+		val createdAt: Int = 0,
+		@JsonProperty("creator_id")
+		val creatorId: Int = 0,
+		@JsonProperty("frames")
+		val frames: List<String>? = null,
+		@JsonProperty("frames_pending")
+		val framesPending: List<String>? = null,
+		@JsonProperty("frames_pending_string")
+		val framesPendingString: String? = null,
+		@JsonProperty("frames_string")
+		val framesString: String? = null,
+		@JsonProperty("has_children")
+		val hasChildren: Boolean? = null,
+		@JsonProperty("is_held")
+		val isHeld: Boolean? = null,
+		@JsonProperty("is_not_locked")
+		val isNoteLocked: Boolean? = null,
+		@JsonProperty("is_pending")
+		val isPending: Boolean? = null,
+		@JsonProperty("is_rating_locked")
+		val isRatingLocked: Boolean? = null,
+		@JsonProperty("is_shown_in_index")
+		val isShownInIndex: Boolean? = null,
+		@JsonProperty("last_commented_at")
+		val lastCommentedAt: Int = 0,
+		@JsonProperty("last_noted_at")
+		val lastNotedAt: Int = 0,
+		@JsonProperty("md5")
+		val md5: String? = null,
+		@JsonProperty("parent_id")
+		val parentId: Int = 0,
+		@JsonProperty("source")
+		val source: String? = null,
+		@JsonProperty("updated_at")
+		val updatedAt: Int = 0,
+		@JsonProperty("tags")
+		override val tagString: String? = null
+) : BoardImageStinged() {
+	@JsonIgnore
+	override val rating: Rating? = Rating.lookupFromStringShort(ratingString)
 
-	override val tags: List<String>
-		get() = arrayListOf()
 
-	override val uRL: String?
-		get() = fileUrl
+	@JsonIgnore
+	override val url: String? = fileUrl
 }

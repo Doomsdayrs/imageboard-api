@@ -17,19 +17,18 @@ package net.kodehawa.lib.imageboards
 
 import net.kodehawa.lib.imageboards.entities.BoardImage
 import net.kodehawa.lib.imageboards.entities.impl.KonachanImage
-import java.util.function.Consumer
 
 object RandomImages {
     @JvmStatic
     fun main(args: Array<String>) {
         // Asynchronous GET
         // 60 random images
-        DefaultImageBoards.KONACHAN.get().async(Consumer { images: List<KonachanImage> -> for (image in images) println(image.uRL) })
+        DefaultImageBoards.KONACHAN.get().async( { images: List<KonachanImage> -> for (image in images) println(image.url) })
 
         // Blocking GET
         // 1 random image
         val image: BoardImage = DefaultImageBoards.KONACHAN[1].blocking()[0]
-        println(image.uRL)
+        println(image.url)
         println(image.rating)
         println(image.tags)
         println(image.height)

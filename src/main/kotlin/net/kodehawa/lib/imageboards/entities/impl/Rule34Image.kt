@@ -15,32 +15,34 @@
  */
 package net.kodehawa.lib.imageboards.entities.impl
 
-import net.kodehawa.lib.imageboards.entities.BoardImage
+import com.fasterxml.jackson.annotation.JsonIgnore
+import com.fasterxml.jackson.annotation.JsonProperty
+import net.kodehawa.lib.imageboards.entities.BoardImageStinged
 import net.kodehawa.lib.imageboards.entities.Rating
 
 /**
  * @author Kodehawa
  */
-class Rule34Image : BoardImage {
-	val directory: String? = null
-	val image: String? = null
-	override val height = 0
-	override val width = 0
-	override val tags: List<String>
-		get() = arrayListOf()
+data class Rule34Image(
+		@JsonProperty("height")
+		override val height: Int = 0,
+		@JsonProperty("width")
+		override val width: Int = 0,
+		@JsonProperty("tags")
+		override val tagString: String? = null,
+		@JsonProperty("score")
+		override val score: Int = 0,
+		@JsonProperty("rating")
+		override val rating: Rating? = Rating.EXPLICIT,
+		@JsonProperty("directory")
+		val directory: String? = null,
+		@JsonProperty("image")
+		val image: String? = null) : BoardImageStinged() {
 
 	//Backwards-compatible.
-	val fileUrl: String
-		get() = "https://img.rule34.xxx/images/$directory/$image"
+	@JsonProperty("file_url")
+	val fileUrl: String = "https://img.rule34.xxx/images/$directory/$image"
 
-	override val score: Int
-		get() = 0
-
-	override val rating: Rating?
-		get() = Rating.EXPLICIT
-
-
-
-	override val uRL: String?
-		get() = fileUrl
+	@JsonIgnore
+	override val url: String? = fileUrl
 }

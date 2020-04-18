@@ -15,42 +15,83 @@
  */
 package net.kodehawa.lib.imageboards.entities.impl
 
-import net.kodehawa.lib.imageboards.entities.BoardImage
+import com.fasterxml.jackson.annotation.JsonIgnore
+import com.fasterxml.jackson.annotation.JsonProperty
+import net.kodehawa.lib.imageboards.entities.BoardImageStinged
 import net.kodehawa.lib.imageboards.entities.Rating
 
 /**
  * @author Kodehawa
  */
-class KonachanImage : BoardImage {
-	val author: String? = null
-	val createdAt = 0
-	val fileSize: Long = 0
-	val fileUrl: String? = null
-	override val height = 0
-	val id = 0
-	val jpegFileSize: Long = 0
-	val jpegHeight = 0
+data class KonachanImage(
+		@JsonProperty("height")
+		override val height: Int = 0,
+		@JsonProperty("width")
+		override val width: Int = 0,
+		@JsonProperty("score")
+		override val score: Int = 0,
 
-	val parsedUrl: String? = null
+		@JsonProperty("url")
+		override val url: String?,
 
-	val jpegWidth = 0
-	val previewHeight = 0
-	val previewUrl: String? = null
-	val previewWidth = 0
+		@JsonProperty("author")
+		val author: String? = null,
+
+		@JsonProperty("created_at")
+		val createdAt: Int = 0,
+
+		@JsonProperty("file_size")
+		val fileSize: Long = 0,
+
+		@JsonProperty("file_url")
+		val fileUrl: String? = null,
+
+		@JsonProperty("id")
+		val id: Int = 0,
+
+		@JsonProperty("jpeg_file_size")
+		val jpegFileSize: Long = 0,
+
+		@JsonProperty("jpeg_height")
+		val jpegHeight: Int = 0,
+
+		@JsonProperty("parsed_url")
+		val parsedUrl: String? = null,
+
+		@JsonProperty("jpeg_width")
+		val jpegWidth: Int = 0,
+
+		@JsonProperty("preview_height")
+		val previewHeight: Int = 0,
+
+		@JsonProperty("preview_url")
+		val previewUrl: String? = null,
+
+		@JsonProperty("preview_width")
+		val previewWidth: Int = 0,
+
+		@JsonProperty("sample_file_size")
+		val sampleFileSize: Long = 0,
+
+		@JsonProperty("sample_height")
+		val sampleHeight: Int = 0,
+
+		@JsonProperty("sample_url")
+		val sampleUrl: String? = null,
+
+		@JsonProperty("sample_width")
+		val sampleWidth: Int = 0,
+
+		@JsonProperty("source")
+		val source: String? = null,
+
+		@JsonProperty("status")
+		val status: String? = null,
+
+		@JsonProperty("tags")
+		override val tagString: String? = null
+) : BoardImageStinged() {
+	@JsonIgnore
 	override val rating: Rating? = null
-	val sampleFileSize: Long = 0
-	val sampleHeight = 0
-	val sampleUrl: String? = null
-	val sampleWidth = 0
-	override val score = 0
-	val source: String? = null
-	val status: String? = null
 
-	override val width = 0
-
-	override val tags: List<String>
-		get() = arrayListOf()
-
-	override val uRL: String?
-		get() = parsedUrl
 }

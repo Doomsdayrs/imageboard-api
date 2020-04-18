@@ -30,7 +30,6 @@ import net.kodehawa.lib.imageboards.requests.RequestFactory
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
 import okhttp3.Response
-import org.slf4j.LoggerFactory
 import java.io.IOException
 import java.util.concurrent.TimeUnit
 
@@ -48,7 +47,7 @@ class ImageBoard<T : BoardImage?>(
 		cls: Class<T>
 ) {
 	companion object {
-		private val log = LoggerFactory.getLogger(ImageBoard::class.java)
+		//private val log = LoggerFactory.getLogger(ImageBoard::class.java)
 
 		/**
 		 * Current version of the image board library.
@@ -239,15 +238,9 @@ class ImageBoard<T : BoardImage?>(
 		}
 		val url = urlBuilder.build()
 		return requestFactory.makeRequest(url) { response: Response ->
-			log.debug(
-					"Making request to {} (Response format: {}, Imageboard: {}, Target: {})",
-					url.toString(),
-					responseFormat,
-					boardType,
-					imageType
-			)
+			println("Making request to $url (Response format: $responseFormat, Imageboard: $boardType, Target: $imageType)")
 			try {
-				response.body().use { body ->
+				response.body.use { body ->
 					if (body == null) {
 						if (throwExceptionOnEOF) {
 							throw QueryParseException(NullPointerException(
@@ -255,7 +248,7 @@ class ImageBoard<T : BoardImage?>(
 											"(From board: $boardType, Target: $imageType)"
 							))
 						} else {
-							return@makeRequest emptyList()
+							return@makeRequest emptyList<T>()
 						}
 					}
 					val images: List<T> = responseFormat.mapper.readValue(
@@ -270,7 +263,7 @@ class ImageBoard<T : BoardImage?>(
 				}
 			} catch (e: IOException) {
 				if (e.message!!.contains("No content to map due to end-of-input") && !throwExceptionOnEOF)
-					return@makeRequest emptyList()
+					return@makeRequest emptyList<T>()
 				throw QueryParseException(e)
 			}
 		}

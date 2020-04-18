@@ -17,6 +17,7 @@ package net.kodehawa.lib.imageboards.requests
 
 import net.kodehawa.lib.imageboards.ImageBoard
 import okhttp3.HttpUrl
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
@@ -41,7 +42,7 @@ class RequestFactory(private val client: OkHttpClient) {
 	 * @return Request action.
 	</T> */
 	fun <T> makeRequest(url: String, transform: (Response) -> T): RequestAction<T> =
-			makeRequest(HttpUrl.parse(url)!!, transform)
+			makeRequest(url.toHttpUrlOrNull()!!, transform)
 
 	/**
 	 * Creates a [request action][RequestAction] on a URL.

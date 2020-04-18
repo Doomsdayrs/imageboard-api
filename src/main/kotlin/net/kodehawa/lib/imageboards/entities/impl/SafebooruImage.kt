@@ -15,29 +15,40 @@
  */
 package net.kodehawa.lib.imageboards.entities.impl
 
-import net.kodehawa.lib.imageboards.entities.BoardImage
+import com.fasterxml.jackson.annotation.JsonIgnore
+import com.fasterxml.jackson.annotation.JsonProperty
+import net.kodehawa.lib.imageboards.entities.BoardImageStinged
 import net.kodehawa.lib.imageboards.entities.Rating
-import java.util.*
 
 /**
  * @author Kodehawa
  */
-class SafebooruImage : BoardImage {
-	val directory: String? = null
-	val image: String? = null
-	override val height = 0
-	override val width = 0
-	override val tags: List<String>
-		get() = arrayListOf()
-	val fileUrl: String
-		get() = "https://safebooru.org/images/$directory/$image"
+data class SafebooruImage(
+		@JsonProperty("score")
+		override val score: Int = 0,
 
-	override val score: Int
-		get() = 0
+		@JsonProperty("rating")
+		override val rating: Rating? = null,
 
-	override val rating: Rating?
-		get() = Rating.SAFE
+		@JsonProperty("height")
+		override val height: Int = 0,
 
-	override val uRL: String?
-		get() = fileUrl
+		@JsonProperty("width")
+		override val width: Int = 0,
+
+		@JsonProperty("tags")
+		override val tagString: String? = null,
+
+		@JsonProperty("directory")
+		val directory: String? = null,
+
+		@JsonProperty("image")
+		val image: String? = null
+
+) : BoardImageStinged() {
+	@JsonProperty("file_url")
+	val fileUrl: String = "https://safebooru.org/images/$directory/$image"
+
+	@JsonIgnore
+	override val url: String? = fileUrl
 }

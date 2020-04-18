@@ -48,5 +48,5 @@ interface BoardImage {
 	/**
 	 * @return Image url.
 	 */
-	val uRL: String?
+	val url: String?
 }

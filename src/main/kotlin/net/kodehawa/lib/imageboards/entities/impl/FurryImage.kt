@@ -15,26 +15,30 @@
  */
 package net.kodehawa.lib.imageboards.entities.impl
 
+import com.fasterxml.jackson.annotation.JsonIgnore
+import com.fasterxml.jackson.annotation.JsonProperty
 import net.kodehawa.lib.imageboards.entities.BoardImage
 import net.kodehawa.lib.imageboards.entities.Rating
-import java.util.*
 
 /**
  * @author Kodehawa
  */
-class FurryImage : BoardImage {
-	//Image description
-	val description: String? = null
-	override val uRL: String? = null
-	override val score = 0
-	override val height = 0
-	override val width = 0
+data class FurryImage(
+		//Image description
+		@JsonProperty("description")
+		val description: String? = null,
+		@JsonProperty("url")
+		override val url: String? = null,
+		@JsonProperty("score")
+		override val score: Int = 0,
+		@JsonProperty("height")
+		override val height: Int = 0,
+		@JsonProperty("width")
+		override val width: Int = 0,
 
-	override val rating: Rating?
-		get() = Rating.EXPLICIT
+		@JsonIgnore
+		override val rating: Rating? = Rating.EXPLICIT,
 
-    override val tags: List<String>
-        get() = TODO("Not yet implemented")
-
-
-}
+		@JsonProperty("tags")
+		override val tags: List<String>
+) : BoardImage
