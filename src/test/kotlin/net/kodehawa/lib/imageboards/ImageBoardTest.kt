@@ -27,14 +27,14 @@ import org.junit.Test
 class ImageBoardTest {
 	@Test
 	fun returnsNonNullValues() {
-		e621[1].async(::assertImages)
+	//	e621[1].async(::assertImages)
 		konachan[1].async(::assertImages)
 		rule34[1].async(::assertImages)
 		yandere[1].async(::assertImages)
 		danbooru[1].async(::assertImages)
 		safebooru[1].async(::assertImages)
 		gelbooru[1].async(::assertImages)
-		e926[1].async(::assertImages)
+		//e926[1].async(::assertImages)
 	}
 
 	@Test
@@ -47,11 +47,6 @@ class ImageBoardTest {
 		printImages(safebooru[2].blocking())
 		printImages(gelbooru[2].blocking())
 		//	printImages(e926[2].blocking())
-	}
-
-	@Test(expected = NullPointerException::class)
-	fun throwErrorNullConsumer() {
-		konachan[1].async({})
 	}
 
 	@Test
@@ -84,13 +79,13 @@ class ImageBoardTest {
 		Assert.assertSame(konachan.search("", rating = SAFE).blocking()[0].rating, SAFE);
 		Assert.assertSame(konachan.get(limit = 7, rating = SAFE).blocking()[0].rating, SAFE);
 		Assert.assertSame(danbooru.get(limit = 7, rating = SAFE).blocking()[0].rating, SAFE);
-		Assert.assertSame(e926.get(limit = 7, rating = SAFE).blocking()[0].rating, SAFE);
+	//	Assert.assertSame(e926.get(limit = 7, rating = SAFE).blocking()[0].rating, SAFE);
 	}
 
 	@Test
 	fun returnsProperClasses() {
-		Assert.assertEquals(e621.boardType, DefaultBoards.E621)
-		Assert.assertEquals(e621.imageType, FurryImage::class.java)
+	//	Assert.assertEquals(e621.boardType, DefaultBoards.E621)
+	//	Assert.assertEquals(e621.imageType, FurryImage::class.java)
 		Assert.assertEquals(konachan.boardType, DefaultBoards.KONACHAN)
 		Assert.assertEquals(konachan.imageType, KonachanImage::class.java)
 		Assert.assertEquals(rule34.boardType, DefaultBoards.R34)
@@ -103,31 +98,31 @@ class ImageBoardTest {
 		Assert.assertEquals(safebooru.imageType, SafebooruImage::class.java)
 		Assert.assertEquals(gelbooru.boardType, DefaultBoards.GELBOORU)
 		Assert.assertEquals(gelbooru.imageType, GelbooruImage::class.java)
-		Assert.assertEquals(e926.boardType, DefaultBoards.E926)
-		Assert.assertEquals(e926.imageType, SafeFurryImage::class.java)
+		//Assert.assertEquals(e926.boardType, DefaultBoards.E926)
+	//	Assert.assertEquals(e926.imageType, SafeFurryImage::class.java)
 	}
 
 	companion object {
-		private val e621 = DefaultImageBoards.E621
+		//private val e621 = DefaultImageBoards.E621
 		private val konachan = DefaultImageBoards.KONACHAN
 		private val rule34 = DefaultImageBoards.RULE34
 		private val yandere = DefaultImageBoards.YANDERE
 		private val danbooru = DefaultImageBoards.DANBOORU
 		private val safebooru = DefaultImageBoards.SAFEBOORU
-		private val e926 = DefaultImageBoards.E926
+		//private val e926 = DefaultImageBoards.E926
 		private val gelbooru = DefaultImageBoards.GELBOORU
 
 		//Run this first to check if everything returns as expected
 		@JvmStatic
 		fun main(args: Array<String>) {
-			e621[2].async(::printImages)
+			//e621[2].async(::printImages)
 			konachan[2].async(::printImages)
 			rule34[2].async(::printImages)
 			yandere[2].async(::printImages)
 			danbooru[2].async(::printImages)
 			safebooru[2].async(::printImages)
 			gelbooru[2].async(::printImages)
-			e926[2].async(::printImages)
+		//	e926[2].async(::printImages)
 		}
 
 		private fun printImages(images: List<BoardImage>) {

@@ -1,6 +1,5 @@
 package net.kodehawa.lib.imageboards.entities.impl
 
-import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 import net.kodehawa.lib.imageboards.entities.BoardImageStinged
 import net.kodehawa.lib.imageboards.entities.Rating
@@ -38,8 +37,10 @@ data class GelbooruImage(
 
 		//Thanks gelbooru for giving a full url I love you
 		@JsonProperty("file_url")
-		val fileUrl: String? = null
+		val fileUrl: String? = null,
+
+		@JsonProperty("rating")
+		val ratingString: String? = null
 ) : BoardImageStinged() {
-	@JsonIgnore
-	override val rating: Rating? = null
+	override val rating: Rating? = Rating.lookupFromStringShort(ratingString)
 }

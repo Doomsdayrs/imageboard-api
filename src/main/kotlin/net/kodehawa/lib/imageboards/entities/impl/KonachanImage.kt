@@ -15,7 +15,6 @@
  */
 package net.kodehawa.lib.imageboards.entities.impl
 
-import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 import net.kodehawa.lib.imageboards.entities.BoardImageStinged
 import net.kodehawa.lib.imageboards.entities.Rating
@@ -89,9 +88,11 @@ data class KonachanImage(
 		val status: String? = null,
 
 		@JsonProperty("tags")
-		override val tagString: String? = null
+		override val tagString: String? = null,
+
+		@JsonProperty("rating")
+		val ratingString: String? = null
 ) : BoardImageStinged() {
-	@JsonIgnore
-	override val rating: Rating? = null
+	override val rating: Rating? = Rating.lookupFromStringShort(ratingString)
 
 }

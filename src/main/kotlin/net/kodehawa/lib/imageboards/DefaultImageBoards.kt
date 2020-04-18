@@ -30,8 +30,7 @@ object DefaultImageBoards {
 			.connectTimeout(3, TimeUnit.SECONDS)
 			.readTimeout(3, TimeUnit.SECONDS)
 			.build()
-	@JvmField
-	val E621 = ImageBoard(client, DefaultBoards.E621, FurryImage::class.java)
+	//val E621 = ImageBoard(client, DefaultBoards.E621, FurryImage::class.java)
 	@JvmField
 	val KONACHAN = ImageBoard(client, DefaultBoards.KONACHAN, KonachanImage::class.java)
 	@JvmField
@@ -42,8 +41,7 @@ object DefaultImageBoards {
 	val DANBOORU = ImageBoard(client, DefaultBoards.DANBOORU, DanbooruImage::class.java)
 	@JvmField
 	val SAFEBOORU = ImageBoard(client, DefaultBoards.SAFEBOORU, SafebooruImage::class.java)
-	@JvmField
-	val E926 = ImageBoard(client, DefaultBoards.E926, SafeFurryImage::class.java)
+	//val E926 = ImageBoard(client, DefaultBoards.E926, SafeFurryImage::class.java)
 	@JvmField
 	val GELBOORU = ImageBoard(client, DefaultBoards.GELBOORU, GelbooruImage::class.java)
 }
